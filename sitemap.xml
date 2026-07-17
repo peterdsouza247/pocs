@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Replace pocs below with your actual GitHub Pages repo name, then submit
+     this file's URL in Google Search Console and Bing Webmaster Tools.
+     If you use a custom domain later, replace the whole base URL instead. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://peterdsouza247.github.io/pocs/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://peterdsouza247.github.io/the-last-hero/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://peterdsouza247.github.io/masters-of-the-way/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://peterdsouza247.github.io/dead-reckoning/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://peterdsouza247.github.io/heirs-reckoning/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://peterdsouza247.github.io/pocs/gdds/gdd_last_hero.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://peterdsouza247.github.io/pocs/gdds/gdd_masters_of_the_way.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://peterdsouza247.github.io/pocs/gdds/gdd_dead_reckoning.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://peterdsouza247.github.io/pocs/gdds/gdd_heirs_reckoning.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>
