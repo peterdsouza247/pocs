@@ -135,6 +135,14 @@
     clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
   }
   .play:hover { background: rgba(95,208,255,.18); box-shadow: 0 0 20px rgba(95,208,255,.25); }
+  .gdd {
+    display: block; text-align: center; margin-top: 8px; padding: 8px;
+    color: var(--dim); font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; border: 1px dashed var(--border);
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+    transition: color .2s, border-color .2s;
+  }
+  .gdd:hover { color: var(--cyan); border-color: var(--cyan); }
   .game.soon, .game.soon.vis { opacity: .5; }
   .game.soon:hover { transform: none; border-color: var(--border); box-shadow: none; }
   .soonlabel {
@@ -274,6 +282,7 @@ const GAMES = [
     title: "The Last Hero",
     genre: "Narrative Strategy · Hall Management",
     href: "https://peterdsouza247.github.io/the-last-hero/",
+    gdd: "https://github.com/peterdsouza247/the-last-hero/blob/main/gdd.html",
     desc: "You are the master of a Hall that heroes visit with problems. Judge them, arm them, advise them, and let their stories happen without you. A rising Shadow gives every campaign an ending; your advice decides which one.",
     tags: ["Emergent narrative", "Advice as mechanic", "4 endings", "Save/load", "Exportable chronicle"],
     art: `<svg viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
@@ -301,6 +310,7 @@ const GAMES = [
     title: "Masters of the Way",
     genre: "Card Battler · Real Martial Arts",
     href: "https://peterdsouza247.github.io/masters-of-the-way/",
+    gdd: "https://github.com/peterdsouza247/masters-of-the-way/blob/main/gdd.html",
     desc: "One-on-one duels built from six real martial arts. Master a single art for its passive and secret techniques, or cross-train for a bigger hand and no blind spots. Control the range: Far, Close, or the Ground. The mat does not lie.",
     tags: ["Deck builder", "Purity vs mixing", "7 AI fighters", "Hotseat 2P", "Range control"],
     art: `<svg viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
@@ -335,6 +345,7 @@ const GAMES = [
     title: "Dead Reckoning",
     genre: "War Commander Sim · Sci-Fi",
     href: "https://peterdsouza247.github.io/dead-reckoning/",
+    gdd: "https://github.com/peterdsouza247/dead-reckoning/blob/main/gdd.html",
     desc: "You are the commander who never leaves the war room. The entire war arrives as field reports from five officers who remember how you treat them, and each one fails you differently when trust runs dry. Somewhere past cycle 25, something old finishes waking up.",
     tags: ["Command by report", "Officer trust", "Doctrine identity", "Medals", "Service record"],
     art: `<svg viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
@@ -358,6 +369,7 @@ const GAMES = [
     title: "The Heir's Reckoning",
     genre: "Narrative Drama · Three Acts",
     href: "https://peterdsouza247.github.io/heirs-reckoning/",
+    gdd: "https://github.com/peterdsouza247/heirs-reckoning/blob/main/gdd.html",
     desc: "Heir to a throne, with a brother eleven months behind you and a best friend who deserves better than court. Every quest you fail, one of them completes in your place, and the realm keeps score. Six endings, two of them earned only by pattern.",
     tags: ["Choices echo forward", "Parallel lives", "6 endings", "Book of Kings", "15-25 min runs"],
     art: `<svg viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
@@ -407,7 +419,8 @@ for (const g of GAMES) {
       <p>${g.desc}</p>
       <div class="tags">${g.tags.map((t) => "<span>" + t + "</span>").join("")}</div>
       ${g.soon ? '<span class="soonlabel">In development</span>'
-               : '<a class="play" href="' + g.href + '">Play the proof of concept</a>'}
+               : '<a class="play" href="' + g.href + '">Play the proof of concept</a>'
+                 + (g.gdd ? '<a class="gdd" href="' + g.gdd + '">Read the design document</a>' : "")}
     </div>`;
   grid.appendChild(d);
 }
