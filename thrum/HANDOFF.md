@@ -1,0 +1,8 @@
+# Resume notes
+
+- v0.1.0: choice-based Tolling Hollow six-puzzle slice, Mote, memories, notebook, duet, procedural pixel art.
+- v0.2.0: adjustable mechanisms, hero swap and positioning, reset, visual guidance, stars, save migration. Simplified rules, not general physics. Original unit tests: 2/2 and 5/5 respectively; original browser walkthroughs passed. Physical device, simultaneous co-op and real save persistence not validated.
+- Next: v0.3.0 bespoke detailed pixel art, character animation, title/menu/icon, parallax, layered music, accessible notebook, mobile safe areas and performance. Then remaining five regions and independent co-op assistance. Follow the archived roadmap. Native Android/iOS and desktop packaging remain pending.
+- Creative references: It Takes Two (asymmetric cooperation), Unravel Two (companionship and physical puzzles), The Lost Vikings (complementary roles), illustrated children's fantasy storybooks. Visual direction: warm bell village, woodland river, glowing cavern, orchard. These are inspirations, not licensed assets; no external reference images retained.
+- Production references: Harrowick, Stancebreaker and EPOC — mobile-first controls, thematic menus, icons, offline saves, parallax, accessibility and regression tests. Make Bramble as active as Fennick. Preserve no combat, no death and no required sound or reading; educational explanations optional. Review real-world science and safety before publishing experiments.
+- Open: name (Thrum or Fennick & Bramble: The Forgotten Song), pricing, engine for later production. Optional sequel ideas: The Wandering Wind, Beneath the Blue, Where the Stars Sleep. Not commitments.
