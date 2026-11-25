@@ -1,0 +1,314 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GDD · Fennick &amp; Bramble — Thrum</title><style>
+  :root { --bg:#030710; --panel:rgba(10,20,36,.82); --ink:#cfe6f5; --dim:#5f7f99; --cyan:#5fd0ff; --violet:#8f7bff; --border:#1c3a55; }
+  * { box-sizing: border-box; }
+  body { margin:0; background: radial-gradient(ellipse 120% 50% at 50% -8%, #0a1a30 0%, transparent 60%), var(--bg);
+    color: var(--ink); font-family: "Segoe UI","Helvetica Neue",Arial,sans-serif; font-size:16px; line-height:1.65; }
+  .page { max-width: 820px; margin: 0 auto; padding: 40px 22px 90px; }
+  .crumbs { font-size: 13px; letter-spacing: 1px; margin-bottom: 26px; }
+  .crumbs a { color: var(--dim); text-decoration: none; }
+  .crumbs a:hover { color: var(--cyan); }
+  h1 { font-weight:300; text-transform:uppercase; letter-spacing:8px; font-size:30px; color:var(--cyan);
+    margin:0 0 4px; text-shadow:0 0 40px rgba(95,208,255,.3); }
+  .docsub { color:var(--dim); margin-bottom:22px; }
+  .actions { margin: 0 0 34px; }
+  .actions a { display:inline-block; margin:0 10px 8px 0; padding:10px 22px; border:1px solid var(--cyan);
+    color:var(--cyan); text-decoration:none; text-transform:uppercase; letter-spacing:2px; font-size:12.5px;
+    background:rgba(95,208,255,.07); clip-path:polygon(9px 0,100% 0,calc(100% - 9px) 100%,0 100%); }
+  a.ghost { border-color:var(--border); color:var(--dim); background:none; }
+  .actions a:hover { background:rgba(95,208,255,.16); }
+  h2 { font-weight:300; text-transform:uppercase; letter-spacing:4px; font-size:18px; color:var(--cyan); margin:44px 0 12px; }
+  h2::before { content:"// "; color:var(--dim); }
+  h3 { font-weight:400; font-size:15px; color:var(--violet); letter-spacing:1px; margin:22px 0 6px; }
+  p, li { color:#a9c2d6; font-weight:300; }
+  b, strong { color:var(--ink); font-weight:500; }
+  table { border-collapse:collapse; width:100%; margin:14px 0; font-size:14.5px; }
+  th { text-align:left; color:var(--cyan); font-weight:400; letter-spacing:1px; text-transform:uppercase; font-size:12px; }
+  th, td { padding:8px 12px; border-bottom:1px solid var(--border); }
+  td { color:#a9c2d6; }
+  pre { background:var(--panel); border:1px solid var(--border); padding:16px 18px; overflow-x:auto;
+    font-size:13px; color:var(--cyan); clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px); }
+  .spec { background:var(--panel); border:1px solid var(--border); padding:6px 18px 10px; margin:18px 0;
+    clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px); }
+  ol, ul { padding-left: 22px; }
+  li { margin: 6px 0; }
+  @media (max-width:560px){ h1{font-size:22px;letter-spacing:5px} .page{padding:26px 14px 60px} th,td{padding:6px 8px} }
+
+hr{border:0;border-top:1px solid #1c3a55}h1{letter-spacing:3px}a{color:var(--cyan)}td,th{overflow-wrap:anywhere}table{max-width:100%}img{max-width:100%;height:auto}</style></head><body><main class="page"><div class="crumbs"><a href="../index.html">← Peter's POCs</a></div><h1>Fennick &amp; Bramble — Thrum</h1><div class="docsub">Parked at v0.2.0 · original game design preserved · 24 November 2026</div><div class="actions"><a href="../thrum/v0.2.0/dist/index.html">Play v0.2.0</a><a href="../thrum/v0.1.0/dist/index.html" class="ghost">Play v0.1.0</a><a href="https://github.com/peterdsouza247/pocs/blob/main/thrum/DESIGN.md" class="ghost">Original Markdown</a><a href="https://github.com/peterdsouza247/pocs/tree/main/thrum" class="ghost">Source &amp; handoff</a></div><div class="spec"><p><strong>Status:</strong> development on hold, not cancelled. Two offline browser prototypes exist. Version 0.2.0 introduces adjustable mechanisms, hero swap, position controls, and puzzle resets. Detailed art, native builds, general physics and simultaneous co-op are not implemented yet.</p><img src="../thrum/v0.2.0/docs/mobile-preview.png" alt="Archived v0.2.0 mobile prototype screenshot"></div><p>Working title: <em>Thrum</em> (proposed) · Draft v0.2 · Prepared for Peter · 24 November 2026</p>
+<hr>
+<h2>At a glance</h2>
+<ul>
+<li><strong>What it is:</strong> a cozy, richly detailed pixel art co-op puzzle adventure for ages 3 to 70.</li>
+<li><strong>Heroes:</strong> Fennick (tinkering mage) and Bramble (gentle protector).</li>
+<li><strong>Core idea:</strong> a forgotten guardian's hum held the world together. It is fading, so sound drains away and things come apart. Players fix it by listening, solving real-physics puzzles as a pair, and helping people remember.</li>
+<li><strong>Scope:</strong> 6 regions, about 50 puzzles, roughly 6 to 8 hours of play.</li>
+<li><strong>Platforms:</strong> mobile first, then PC, Mac, and Linux.</li>
+<li><strong>World:</strong> standalone, not set in Harrowick.</li>
+<li><strong>Feel:</strong> easy to learn, fun to play, no combat, no death, no punishing failure.</li>
+</ul>
+<hr>
+<h2>1. Vision</h2>
+<p>Two heroes travel a world whose guardian has been forgotten. The hum that kept everything in tune is fading. Nobody is the enemy; the cause is forgetting. You progress by understanding, never by defeating.</p>
+<p><strong>Design pillars</strong></p>
+<ul>
+<li><strong>Easy to learn, fun to play.</strong> The core loop is understood in under a minute with no reading.</li>
+<li><strong>Two layers everywhere.</strong> Play by feel, or go deeper into why it works.</li>
+<li><strong>Always together.</strong> No puzzle can be solved by one hero alone.</li>
+<li><strong>Empathy is the mechanic.</strong> Every region's problem is solved by understanding someone.</li>
+<li><strong>Kitchen-table science.</strong> Every puzzle could be tried with real objects.</li>
+<li><strong>Warm, never grim.</strong> Danger is gentle, and humor runs on two tracks: slapstick for kids, dry wit for adults.</li>
+</ul>
+<hr>
+<h2>2. Story</h2>
+<p><strong>Premise.</strong> Long ago a guardian called Thrum (working name) kept the world in tune with a low, constant hum. It never asked for anything. Each year people rang the bells for the Thanking, a festival of thanks for the hum. Over generations the festival shrank, then stopped. The hum was so constant that people stopped hearing it, then stopped remembering where it came from. Without attention or thanks, Thrum grew quieter and finally fell silent. Now sound is draining from the land, and everything the hum held together is coming loose.</p>
+<p><strong>Visual device.</strong> The world starts desaturated and quiet. Each restored region regains color and adds a layer to the music, so progress is both seen and heard.</p>
+<p><strong>Structure</strong></p>
+<ul>
+<li><strong>Act I, Tolling Hollow.</strong> Fennick's notebook shows the hum is failing. The heroes ring the first bell in generations and learn about the Thanking.</li>
+<li><strong>Act II, four regions.</strong> Each region has a broken note of the hum and villagers who remember Thrum. Solving puzzles unlocks memories, and memories restore the note.</li>
+<li><strong>Midpoint, Glimmerdeep.</strong> The heroes glimpse Thrum's shape for the first time: vast, curled, still. It is not a monster.</li>
+<li><strong>Act III, the Hollow Heart.</strong> Every note must be played together. The finale is a Thanking held by the whole world, and Thrum wakes because it is finally remembered.</li>
+<li><strong>Epilogue.</strong> Bells ring across the world. Someone thanks Bramble.</li>
+</ul>
+<hr>
+<h2>3. Characters</h2>
+<p><strong>Fennick (mage, the Diagnoser).</strong> Small, curious tinkerer with a hat full of jars and a notebook that draws what Fennick learns. <em>Flaw:</em> tests before listening, causing funny, harmless mishaps. <em>Arc:</em> learns to listen first.</p>
+<p><strong>Bramble (tank, the Holder).</strong> Big, patient, and kind, with a shield that doubles as a bridge, a shelter, and a lever. <em>Flaw:</em> carries everything alone and never asks for help. <em>Arc:</em> learns to accept help and to be thanked.</p>
+<p><strong>Thrum (the fallen guardian).</strong> Vast and ancient, known only through memories until the midpoint. <em>Suggested design:</em> part creature, part landscape, so some hills the heroes have crossed turn out to be its curled body. Seed this early with background hills that rise and fall very slowly, like breathing. Thrum never speaks in words; it hums.</p>
+<p><strong>Mote (companion and hint system).</strong> A tiny hum-moth. It circles whatever needs attention, glows brighter near the solution, and flutters away from wrong guesses. As the hum returns, Mote grows brighter and more colorful, acting as a progress meter a 3-year-old can read.</p>
+<p><strong>Memory keepers.</strong> Each region has two or three villagers who hold a memory of Thrum (listed per region). Each memory is a short sound fragment with a small animated scene.</p>
+<hr>
+<h2>4. Core mechanics</h2>
+<h3>Verbs</h3>
+<p><strong>Fennick</strong></p>
+<ul>
+<li><strong>Listen:</strong> shows sound, flow, or vibration as a visible pattern on an object.</li>
+<li><strong>Test:</strong> try an item or setting. Wrong tries give funny, harmless results.</li>
+<li><strong>Tune:</strong> adjust a size, length, angle, or mix.</li>
+<li><strong>Tinker:</strong> swap or connect parts.</li>
+</ul>
+<p><strong>Bramble</strong></p>
+<ul>
+<li><strong>Brace:</strong> hold something steady.</li>
+<li><strong>Lift:</strong> raise or carry an object.</li>
+<li><strong>Shelter:</strong> shield a spot from rain, falling debris, or wind.</li>
+<li><strong>Bridge:</strong> lay the shield across a gap.</li>
+</ul>
+<p><strong>Shared</strong></p>
+<ul>
+<li><strong>Duet:</strong> both heroes press and hold together, and their hums join on screen. Used to finish every region.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li><strong>Pair rule.</strong> Every puzzle runs Diagnose (Fennick), Support (Bramble), Solve (both). Each step unlocks the next.</li>
+<li><strong>Solo play.</strong> One player controls both with a swap button; the idle hero holds position automatically.</li>
+<li><strong>Co-op.</strong> Two players on one screen, so a child and a grandparent can each own a hero.</li>
+<li><strong>No fail states.</strong> A wrong try gives a funny result and resets in seconds. Mote hints gently after about 20 seconds without progress, then more clearly.</li>
+<li><strong>Memory collection.</strong> Three memories per region; each adds a layer to the music.</li>
+</ul>
+<h3>Three layers of depth</h3>
+<ol>
+<li><strong>By feel.</strong> Follow Mote and try things. Enough to finish the game.</li>
+<li><strong>Notebook.</strong> One tap shows a drawing and a line of text or audio explaining why it worked.</li>
+<li><strong>Try it at home.</strong> A card with a real experiment using household objects.</li>
+</ol>
+<p>Optional: an <strong>Elegant Solution</strong> star for solving a puzzle the way the science intends instead of by brute force.</p>
+<h3>Modes</h3>
+<ul>
+<li><strong>Cozy:</strong> extra hints and auto-assist.</li>
+<li><strong>Curious:</strong> the default.</li>
+<li><strong>Tinkerer:</strong> bonus puzzles and fewer hints.</li>
+</ul>
+<h3>Mobile-first controls</h3>
+<ul>
+<li>Landscape only. Keep every puzzle inside a safe area and let backgrounds extend past it for tall phone screens.</li>
+<li>Tap-to-move and tap-to-act with large touch targets. Hero swap is one tap.</li>
+<li>Duet is a two-finger or two-thumb hold, which also works as two people each pressing one side of a tablet.</li>
+<li>Main co-op on mobile: two players on one tablet, each owning a hero. Phones get solo play with swap. Gamepad co-op arrives with the desktop release.</li>
+<li>Auto-save after every puzzle, and design each puzzle for a 3 to 5 minute session.</li>
+</ul>
+<h3>Accessibility</h3>
+<p>No required reading (icons, color, pattern, and sound all carry meaning); colorblind-safe palettes with shape cues; read-aloud notebook; adjustable timing; one-button mode; hold instead of mash.</p>
+<hr>
+<h2>5. Puzzle template and worked example</h2>
+<p><strong>Template</strong></p>
+<ol>
+<li><strong>Setup.</strong> Something is broken or silent, and Mote circles it.</li>
+<li><strong>Diagnose (Fennick).</strong> Listen reveals the problem as a visible pattern.</li>
+<li><strong>Support (Bramble).</strong> Hold, lift, or shelter so Fennick can act safely or reach.</li>
+<li><strong>Solve.</strong> Fennick tunes or tinkers while Bramble supports.</li>
+<li><strong>Payoff.</strong> A sound, light, or animation reward plus a notebook page. Every third puzzle yields a memory.</li>
+</ol>
+<p><strong>Worked example: Puzzle 1, The Mute Bell</strong></p>
+<ul>
+<li><strong>Setup:</strong> the village bell hangs silent and Mote circles it.</li>
+<li><strong>Diagnose:</strong> Fennick listens, and the bell shows a flat line with a glowing spot at the rim where a vine presses against it.</li>
+<li><strong>Support and Solve:</strong> Bramble lifts the vine away. The bell rings, and villagers look up for the first time.</li>
+<li><strong>Notebook:</strong> a bell has to wobble to sing, and touching it stops the wobble.</li>
+<li><strong>Try it at home:</strong> tap a glass or metal pot, then touch it and hear the sound stop.</li>
+<li><strong>Elegant Solution star:</strong> remove the vine without bumping the bell.</li>
+<li><strong>Story beat:</strong> carved on the bell is the old thank-you pattern, the first clue about the Thanking.</li>
+</ul>
+<hr>
+<h2>6. Regions and puzzles</h2>
+<h3>Region 1: Tolling Hollow (6 puzzles, tutorial)</h3>
+<p><strong>Science:</strong> sound, vibration, structure. <strong>Look:</strong> a warm hillside village full of silent bells.</p>
+<p><strong>Story:</strong> the village once held the Thanking. Ringing the first bell in generations reminds people it ever existed.</p>
+<p><strong>Memory keepers:</strong> Tamsin, the old bell-ringer who stopped ringing because nobody listened; Odo, a child who hums a lullaby nobody can trace; Hob, the baker who wakes before dawn to a sound he cannot name.</p>
+<p><strong>Introduces:</strong> all verbs, Mote, the notebook, and the Duet.</p>
+<ol>
+<li><strong>The Mute Bell.</strong> Fennick finds the muffling vine; Bramble lifts it. <em>Vibration and damping.</em></li>
+<li><strong>The Leaning Tower.</strong> Bramble braces the beam while Fennick swaps a square brace for a triangle. <em>Triangles hold their shape.</em></li>
+<li><strong>The Stuck Mill Wheel.</strong> Fennick re-meshes the gears while Bramble holds the wheel still. <em>Gears and direction of rotation.</em></li>
+<li><strong>The Well Lever.</strong> Fennick chooses counterweights while Bramble holds the pivot post. <em>Levers and balance.</em></li>
+<li><strong>The Bell Choir.</strong> Fennick tunes three bells by size while Bramble steadies them. <em>Bigger means lower pitch.</em></li>
+<li><strong>The Chime.</strong> Duet: one bell sets the next ringing until the whole village chimes. <em>Sympathetic resonance.</em></li>
+</ol>
+<h3>Region 2: Reedwater (9 puzzles)</h3>
+<p><strong>Science:</strong> water and flow. <strong>Look:</strong> a marsh town on stilts, with ferries and herons.</p>
+<p><strong>Story:</strong> ferry folk and herons each assume the other stilled the river. The heroes show it is the fading hum, and both sides soften.</p>
+<p><strong>Memory keepers:</strong> Marl, the ferrywoman with a river-song; Wick, the heron elder with a dawn-call; a fisher child who saw the river move on its own once.</p>
+<p><strong>Introduces:</strong> sorting and routing puzzles with Test. Fennick rushes and floods a dock, a comic beat.</p>
+<ol>
+<li><strong>The Floating Ferry.</strong> Fennick tests which cargo floats; Bramble carries the sinkers. <em>Buoyancy and density.</em></li>
+<li><strong>The Plugged Channel.</strong> Fennick listens for the gurgle; Bramble clears the blockage. <em>Flow and blockage.</em></li>
+<li><strong>Lock and Level.</strong> Fennick opens sluices; Bramble holds the gate. <em>Water finds its level.</em></li>
+<li><strong>Stilt Walk.</strong> Bramble braces stilts while Fennick levels their lengths. <em>Wide bases are stable.</em></li>
+<li><strong>Mud to Clear.</strong> Fennick layers sand, gravel, and charcoal; Bramble holds the sieve. <em>Filtration.</em></li>
+<li><strong>The Heron's Pond.</strong> Bramble shelters the nest; Fennick refills the pond with a siphon. <em>Siphons and pressure.</em></li>
+<li><strong>The Whirl.</strong> Fennick spins a paddle; Bramble blocks the eddy. <em>Currents and vortices.</em></li>
+<li><strong>The Barrel Chain.</strong> Fennick routes pipes; Bramble lifts barrels uphill. <em>Gravity-fed flow.</em></li>
+<li><strong>The River Remembers.</strong> Duet: Fennick tunes ripples while Bramble channels the river so it carries the note. <em>Waves in water.</em></li>
+</ol>
+<h3>Region 3: Glimmerdeep (9 puzzles)</h3>
+<p><strong>Science:</strong> light and shadow. <strong>Look:</strong> an underground town of mirror-makers and glow-mushrooms, lights guttering.</p>
+<p><strong>Story:</strong> Pell the lamplighter is afraid of the dark now that the glow has faded. Bramble sits with Pell, and the heroes learn what the dark means to someone small.</p>
+<p><strong>Memory keepers:</strong> Pell, who remembers Thrum's glow; Sorrel, the mirror-maker who inherited an unfinished mirror; a glow-mushroom grower with a lantern song.</p>
+<p><strong>Introduces:</strong> continuous angle and rotation control. <strong>Midpoint:</strong> the final puzzle reveals Thrum's shape.</p>
+<ol>
+<li><strong>The Dark Lamp.</strong> Fennick lights the lamp; Bramble holds the mirror. <em>Reflection.</em></li>
+<li><strong>The Shadow Door.</strong> Fennick moves the light to resize a shadow; Bramble holds the shape. <em>Shadows and distance.</em></li>
+<li><strong>The Prism Bridge.</strong> Fennick angles a prism; Bramble holds it steady. <em>Refraction and color.</em></li>
+<li><strong>The Color Lanterns.</strong> Fennick mixes colored lights; Bramble carries filters. <em>Color mixing.</em></li>
+<li><strong>The Mirror Maze.</strong> Fennick sets mirrors; Bramble braces them. <em>Angle in equals angle out.</em></li>
+<li><strong>The Mushroom Garden.</strong> Fennick keeps the mushrooms lit; Bramble shades the ones that wilt. <em>Light and living things.</em></li>
+<li><strong>The Lens Window.</strong> Fennick focuses a lens; Bramble holds the frame. <em>Magnification.</em></li>
+<li><strong>The Shadow Clock.</strong> Fennick reads the shadow; Bramble turns the stone. <em>Shadows and time.</em></li>
+<li><strong>The Mirror Choir.</strong> Duet: beams bounce to tune the crystals, and Thrum's shape appears in the light. <em>Light as pattern.</em></li>
+</ol>
+<h3>Region 4: Thistledown Terraces (9 puzzles)</h3>
+<p><strong>Science:</strong> growth and ecosystems. <strong>Look:</strong> terraced farms and orchards that change with day and night.</p>
+<p><strong>Story:</strong> Granny Oake stopped tending the orchard because nothing she planted answered. The crows are not pests; they are hungry, and the heroes learn to see it.</p>
+<p><strong>Memory keepers:</strong> Granny Oake, who remembers the orchard waking to the hum; the beekeeper, with a hive song; the scarecrow-maker, who talks to crows.</p>
+<p><strong>Introduces:</strong> time. Puzzles span a day and night cycle, with wait-and-return steps.</p>
+<ol>
+<li><strong>The Sleeping Seed.</strong> Fennick tests water, sun, and soil; Bramble carries soil. <em>What seeds need.</em></li>
+<li><strong>The Terrace Wall.</strong> Bramble rebuilds the wall; Fennick adds drainage. <em>Erosion and drainage.</em></li>
+<li><strong>The Compost Heap.</strong> Fennick balances greens and browns; Bramble turns the heap. <em>Decomposition.</em></li>
+<li><strong>The Bee Path.</strong> Fennick plants a flower trail; Bramble shelters the hive. <em>Pollination.</em></li>
+<li><strong>The Climbing Beans.</strong> Fennick places a trellis; Bramble props it. <em>Plants grow toward light and support.</em></li>
+<li><strong>Root and Rock.</strong> Fennick listens for roots; Bramble moves the rock. <em>Roots and soil layers.</em></li>
+<li><strong>The Frost Night.</strong> Bramble covers the crop; Fennick sets warm lamps. <em>Insulation.</em></li>
+<li><strong>The Scarecrow Whisperer.</strong> Fennick decodes the crows; Bramble builds a feeding post. <em>Ecosystems.</em></li>
+<li><strong>The Orchard Sings.</strong> Duet: pollinators hum together and the orchard blooms. <em>Many small signals add up.</em></li>
+</ol>
+<h3>Region 5: Emberforge (9 puzzles)</h3>
+<p><strong>Science:</strong> heat and energy. <strong>Look:</strong> a forge-town on a warm hillside, furnaces cold.</p>
+<p><strong>Story:</strong> Dagna the smith is gruff; Kit, the apprentice, hid a mistake that went cold with the forge. Kit offers to carry part of a load, and Bramble accepts.</p>
+<p><strong>Memory keepers:</strong> Dagna, who remembers the forge never needing relighting; Kit, who heard the hum in the anvil; a charcoal burner with a work song.</p>
+<p><strong>Introduces:</strong> chained systems where one result powers the next.</p>
+<ol>
+<li><strong>The Cold Forge.</strong> Fennick lays kindling for airflow; Bramble works the bellows. <em>Fire needs air.</em></li>
+<li><strong>The Hot Handle.</strong> Fennick picks materials; Bramble carries the hot piece. <em>Conductors and insulators.</em></li>
+<li><strong>The Tight Gap.</strong> Fennick heats or cools the ring; Bramble holds the shaft. <em>Thermal expansion.</em></li>
+<li><strong>The Pulley Lift.</strong> Fennick rigs the pulley; Bramble hauls. <em>Mechanical advantage.</em></li>
+<li><strong>The Ramp.</strong> Fennick builds the ramp; Bramble steadies the load. <em>Inclined planes.</em></li>
+<li><strong>The Steam Whistle.</strong> Fennick boils; Bramble caps the vent. <em>Steam and pressure, kept safe.</em></li>
+<li><strong>The Wheel Chain.</strong> Fennick links water wheel, gears, and bellows; Bramble braces the frame. <em>Energy transfer.</em></li>
+<li><strong>The Rusted Anvil.</strong> Fennick treats the rust; Bramble holds the anvil. <em>Oxidation.</em></li>
+<li><strong>The Forge Hums.</strong> Duet: hammer rhythm matched to the forge. <em>Rhythm and frequency.</em></li>
+</ol>
+<h3>Region 6: The Hollow Heart (8 puzzles, finale)</h3>
+<p><strong>Science:</strong> everything combined. <strong>Look:</strong> a vast resonant cavern where Thrum sleeps, desaturated until the last puzzle.</p>
+<p><strong>Story:</strong> villagers from every region arrive, carrying their memories. The finale is the Thanking, held for Thrum.</p>
+<p><strong>Introduces:</strong> nothing new; every earlier mechanic returns in combination.</p>
+<ol>
+<li><strong>The Long Stair.</strong> Brace and re-brace the steps. <em>Structure.</em></li>
+<li><strong>The Silent Organ.</strong> Tune pipe lengths. <em>Sound and pitch.</em></li>
+<li><strong>The Hanging Waters.</strong> Route a cavern stream. <em>Flow.</em></li>
+<li><strong>The Dim Vault.</strong> Direct light with mirrors. <em>Reflection.</em></li>
+<li><strong>The Overgrown Door.</strong> Guide roots and vines. <em>Growth.</em></li>
+<li><strong>The Cold Furnace.</strong> Relight the heart furnace. <em>Heat and air.</em></li>
+<li><strong>The Memory Chamber.</strong> Place every collected memory in order. <em>Listening and remembering.</em></li>
+<li><strong>The Wake.</strong> Duet: Fennick conducts and Bramble holds the note as every memory joins in. Thrum wakes.</li>
+</ol>
+<hr>
+<h2>7. Progression</h2>
+<ul>
+<li><strong>Hollow:</strong> all verbs, one step each.</li>
+<li><strong>Reedwater:</strong> Test, sorting, and routing; two-step puzzles.</li>
+<li><strong>Glimmerdeep:</strong> continuous angle control; three-step puzzles.</li>
+<li><strong>Thistledown:</strong> time, with wait-and-return puzzles.</li>
+<li><strong>Emberforge:</strong> chained systems.</li>
+<li><strong>Hollow Heart:</strong> combinations only, no new verbs.</li>
+</ul>
+<p>Rule: introduce one new idea per region and reuse everything else.</p>
+<hr>
+<h2>8. Character arcs by region</h2>
+<ul>
+<li><strong>Hollow:</strong> baseline. Fennick tests fast; Bramble carries everything.</li>
+<li><strong>Reedwater:</strong> Fennick rushes and floods the dock. Bramble refuses a ferrywoman's offer of help.</li>
+<li><strong>Glimmerdeep:</strong> Bramble sits with Pell and recognizes a little of the lonely guardian in Pell's fear.</li>
+<li><strong>Thistledown:</strong> Fennick stops and listens first, and the puzzle opens.</li>
+<li><strong>Emberforge:</strong> Kit offers to carry, and Bramble accepts.</li>
+<li><strong>Hollow Heart:</strong> Fennick listens, Bramble is helped, and the world thanks them both.</li>
+</ul>
+<hr>
+<h2>9. Art, audio, and technical direction</h2>
+<p>Items marked <em>proposed</em> are recommendations awaiting your confirmation.</p>
+<ul>
+<li><strong>Art (proposed):</strong> internal resolution of 480x270, scaled up in whole-number steps. Heroes around 32x48 pixels, or about 40x56 if they are hard to read on small phones. Put extra detail into backgrounds, lighting, and parallax rather than tiny sprites.</li>
+<li><strong>Voice (proposed):</strong> no spoken words. Characters speak in expressive, instrument-like sounds. The notebook carries text with optional read-aloud, which also keeps localization cheap.</li>
+<li><strong>Music (proposed):</strong> a constant drone in a fixed key is the hum, always present. Each region adds an instrument family: bells (Hollow), woodwinds and water percussion (Reedwater), glass and harp (Glimmerdeep), plucked strings (Thistledown), percussion and brass (Emberforge), choir (Hollow Heart). Everything stays in key, so any combination sounds good. Stream the layers to keep the mobile download small.</li>
+<li><strong>Science accuracy:</strong> have each notebook page checked against a reliable source, and playtest each Try-it-at-home card with real objects.</li>
+<li><strong>Engine (open):</strong></li>
+</ul>
+<p>  - <em>Godot:</em> one codebase exports to iOS, Android, Windows, Mac, and Linux, with strong 2D support.</p>
+<p>  - <em>TypeScript with Phaser and Capacitor:</em> reuses your existing stack, but needs more care around mobile performance and desktop packaging.</p>
+<hr>
+<h2>10. Release and pricing approach</h2>
+<ul>
+<li><strong>Platform order (decided):</strong> mobile first, then PC, Mac, and Linux.</li>
+<li><strong>Tension to resolve:</strong> your goal is a game worth at least $20, but premium mobile games generally sell for much less than that, while PC supports higher prices more comfortably. Check current store prices for comparable titles before fixing numbers.</li>
+<li><strong>Suggested model (proposed):</strong> a free first region (Tolling Hollow) with a one-time unlock for the full game. No ads and no in-app purchases, which suits a family audience. Set the PC price higher at its own launch.</li>
+<li><strong>Staged release (proposed):</strong> prototype Tolling Hollow, add two more regions for early access at a lower price, then complete the remaining regions and raise the price at 1.0.</li>
+</ul>
+<hr>
+<h2>11. Prototype plan</h2>
+<p>Build a vertical slice of Tolling Hollow: 6 puzzles, 3 memories, the Duet, Mote, the notebook, and the village chime.</p>
+<p><strong>Success tests</strong></p>
+<ul>
+<li>A 4-year-old with a parent finishes Puzzle 1 without reading.</li>
+<li>A teenager or adult finds at least one notebook page worth reading.</li>
+<li>Two players of different ages share one tablet without fighting over control.</li>
+<li>The slice runs at a steady frame rate on a mid-range phone.</li>
+<li>Most playtesters finish the Hollow and want more.</li>
+<li>The village chime gets a visible, emotional reaction.</li>
+</ul>
+<p>Track your real hours on the first puzzle to calibrate the schedule for the remaining 44.</p>
+<hr>
+<h2>12. Decisions log</h2>
+<table><thead><tr><th>Decision</th><th>Status</th></tr></thead><tbody>
+<tr><td>Standalone world (not Harrowick)</td><td>Decided</td></tr>
+<tr><td>Two heroes: Fennick and Bramble</td><td>Decided</td></tr>
+<tr><td>Cause: a fallen guardian, forgotten</td><td>Decided</td></tr>
+<tr><td>Merged premise: the Quiet plus the Unmending</td><td>Decided</td></tr>
+<tr><td>Platforms: mobile first, then PC/Mac/Linux</td><td>Decided</td></tr>
+<tr><td>Title: <em>Thrum</em></td><td>Proposed</td></tr>
+<tr><td>Thrum as creature-landscape</td><td>Proposed</td></tr>
+<tr><td>Sprite resolution and screen setup</td><td>Proposed</td></tr>
+<tr><td>No spoken words</td><td>Proposed</td></tr>
+<tr><td>Layered-drone music approach</td><td>Proposed</td></tr>
+<tr><td>Free first region plus one-time unlock</td><td>Proposed</td></tr>
+<tr><td>Engine: Godot or TypeScript stack</td><td>Open</td></tr>
+<tr><td>Final pricing</td><td>Open</td></tr>
+</tbody></table><h2>Development handoff</h2><p>See the <a href="https://github.com/peterdsouza247/pocs/blob/main/thrum/HANDOFF.md">archive notes</a> and <a href="https://github.com/peterdsouza247/pocs/blob/main/thrum/v0.2.0/docs/ROADMAP.md">roadmap</a> for implementation status and remaining work.</p></main></body></html>

@@ -1,0 +1,1 @@
+const fs=require('node:fs');let html=fs.readFileSync('src/index.html','utf8');for(const [marker,file] of [['STYLE','style.css'],['ENGINE','engine.js'],['APP','app.js']])html=html.replace('/*'+marker+'*/',()=>fs.readFileSync('src/'+file,'utf8'));fs.mkdirSync('dist',{recursive:true});fs.writeFileSync('dist/index.html',html);console.log('Built dist/index.html');
